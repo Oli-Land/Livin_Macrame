@@ -9,9 +9,3 @@ class Course(db.Model):
     def __init__(self, course_name):
         self.course_name = course_name
     
-    @property
-    def serialize(self):
-        return {
-            "course_id": self.course_id,
-            "course_name": self.course_name
-        }
