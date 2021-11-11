@@ -33,7 +33,7 @@ def get_courses():
 
 @courses.route("/courses/", methods=["POST"])
 def create_course():
-    new_course = course_schema.load(request.json)
+    new_course = course_schema.load(request.form)
     db.session.add(new_course)
     db.session.commit()
     return jsonify(course_schema.dump(new_course))
