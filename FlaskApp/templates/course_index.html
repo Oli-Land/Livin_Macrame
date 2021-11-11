@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for course in page_data.courses %}
+        <a href="/courses/{{ course.course_id }}/">{{ course.course_name }}</a><br/>
+    {% endfor %}
+{% endblock %}

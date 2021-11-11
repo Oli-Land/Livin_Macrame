@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 from main import db
 from models.courses import Course
 from schemas.course_schema import courses_schema, course_schema
+
 
 courses = Blueprint('courses', __name__)
 
@@ -21,10 +22,14 @@ def get_specific_students(student_id):
 
 
 
+# The GET routes endpoint
 @courses.route("/courses/", methods=["GET"])
 def get_courses():
-    courses = Course.query.all()
-    return jsonify(courses_schema.dump(courses))
+    data = {
+    "page_title": "Course Index",
+    "courses": courses_schema.dump(Course.query.all())
+    }
+    return render_template("course_index.html", page_data = data)
 
 @courses.route("/courses/", methods=["POST"])
 def create_course():
