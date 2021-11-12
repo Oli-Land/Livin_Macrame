@@ -5,9 +5,9 @@ FlaskApp/
 │  ├─ controllers/ <!-- Contains files which  -->
 │  │  ├─ __init__.py <!-- lists controllers -->
 │  │  ├─ course_controller.py <!-- paths for course views -->
-│  ├─ models/
+│  ├─ models/ <!-- talks to the db -->
 │  │  ├─ courses.py
-│  ├─ schemas/
+│  ├─ schemas/ <!-- communicate between controller and model -->
 │  │  ├─ course_schema.py
 │  ├─ templates/
 │  ├─ tests/
