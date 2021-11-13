@@ -10,4 +10,6 @@ Input the following:
     python3 -m unittest discover -s tests -v
 
 
-directory ~/VSCode/testing/side_app/FlaskApp/FlaskApp
+directory: ~/VSCode/testing/side_app/FlaskApp
+
+browser: 127.0.0.1:5000/courses/
