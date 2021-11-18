@@ -28,7 +28,7 @@ def get_users():
     return render_template("user_index.html", page_data = data)
 
 # The signup route endpoint.
-@users.route("/users/signup/", methods = ["GET", "POST"])
+@users.route("/users/signup/", methods=["GET", "POST"])
 def sign_up():
     data = {"page_title": "Sign Up"}
     
@@ -62,8 +62,9 @@ def log_in():
 def user_detail():
     if request.method == "GET":
         data = {"page_title": "Account Details"}
-        return render_template("user_detail.html", page_data = data)
+        return render_template("user_details.html", page_data = data)
     
+    # anything past the GET return must be for POST requests
     user = User.query.filter_by(id = current_user.id)
     updated_fields = user_schema.dump(request.form)
     errors = user_update_schema.validate(updated_fields)

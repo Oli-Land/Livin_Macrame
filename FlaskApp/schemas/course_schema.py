@@ -10,6 +10,7 @@ class CourseSchema(ma.SQLAlchemyAutoSchema):
     course_id = auto_field(dump_only=True)
     # Add imported marshmallow validators here
     course_name = auto_field(required=True, validate=Length(min=1))
+    description = auto_field(validate=Length(min=1))
 
     #metadata about the CourseSchema class
     class Meta:
