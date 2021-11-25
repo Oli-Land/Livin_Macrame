@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify, request, render_template, redirect, url_for, current_app
+from flask import Blueprint, jsonify, request, render_template, redirect, url_for, abort, current_app
 from main import db
 from models.courses import Course
 from schemas.course_schema import courses_schema, course_schema
+from flask_login import login_required, current_user
 import boto3
 
 courses = Blueprint('courses', __name__)
@@ -28,12 +29,17 @@ def get_courses():
     return render_template("course_index.html", page_data=data)
 
 
-# The POST routes endpoint
+# The POST route endpoint
 @courses.route("/courses/", methods=["POST"])
+@login_required
 def create_course():
     new_course = course_schema.load(request.form)
+    new_course.creator = current_user
     db.session.add(new_course)
     db.session.commit()
+
+    # check 
+    print(course_schema.dump(new_course))
     return redirect(url_for("courses.get_courses")) 
 
 
@@ -63,9 +69,13 @@ def get_course(id):
 
 # The PUT/PATCH route
 @courses.route("/courses/<int:id>/", methods=["POST"])
+@login_required
 def update_course(id):
 
     course = Course.query.filter_by(course_id=id)
+
+    if current_user.id != course.first().creator_id:
+        abort(403, "You do not have permission to alter this course!")
 
     updated_fields = course_schema.dump(request.form)
     if updated_fields:
@@ -78,11 +88,33 @@ def update_course(id):
     }
     return render_template("course_detail.html", page_data=data)
 
+# Enrol in course
+@courses.route("/courses/<int:id>/enrol/", methods=["POST"])
+@login_required
+def enrol_in_course(id):
+    course = Course.query.get_or_404(id)
+    course.students.append(current_user)
+    db.session.commit()
+    return redirect(url_for('users.user_detail'))
+
+# Drop course
+@courses.route("/courses/<int:id>/drop/", methods=["POST"])
+@login_required
+def drop_course(id):
+    course = Course.query.get_or_404(id)
+    course.students.remove(current_user)
+    db.session.commit()
+    return redirect(url_for('users.user_detail'))
 
 # The DELETE endpoint
 @courses.route("/courses/<int:id>/delete/", methods=["POST"])
+@login_required
 def delete_course(id):
     course = Course.query.get_or_404(id)
+
+    if current_user.id != course.creator_id:
+        abort(403, "You do not have permission to delete this course!")
+
     db.session.delete(course)
     db.session.commit()
     return redirect(url_for("courses.get_courses"))
