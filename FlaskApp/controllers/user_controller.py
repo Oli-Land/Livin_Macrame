@@ -1,9 +1,11 @@
 from flask import Blueprint, request, render_template, redirect, url_for, abort
 from main import db, lm
 from models.users import User
+from models.courses import Course
 from schemas.user_schema import user_schema, users_schema, user_update_schema
 from flask_login import login_user, logout_user, login_required, current_user
 from marshmallow import ValidationError
+from sqlalchemy import func
 
 # Getting a user instance based on the session information in their browser cookie
 @lm.user_loader
@@ -61,7 +63,10 @@ def log_in():
 @login_required
 def user_detail():
     if request.method == "GET":
-        data = {"page_title": "Account Details"}
+        data = {
+            "page_title": "Account Details",
+            "price": db.session.query(func.avg(Course.price)).filter(Course.creator_id==current_user.id).scalar()
+        }
         return render_template("user_details.html", page_data = data)
     
     # anything past the GET return must be for POST requests

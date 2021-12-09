@@ -24,7 +24,7 @@ def home_page():
 def get_courses():
     data = {
     "page_title": "Course Index",
-    "courses": courses_schema.dump(Course.query.all())
+    "courses": courses_schema.dump(Course.query.group_by(Course.course_id).all())
     }
     return render_template("course_index.html", page_data=data)
 
