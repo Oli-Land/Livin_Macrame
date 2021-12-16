@@ -28,8 +28,8 @@ class User(UserMixin, db.Model):
         server_default="False"
     )
 
-    courses = db.relationship(
-        'Course',
+    projects = db.relationship(
+        'Project',
         backref="creator",
         lazy="joined"
     )

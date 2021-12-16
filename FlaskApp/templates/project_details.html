@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>{{ page_data.project.project_name }}</h2>
+    <img src="{{ page_data.image }}" style="width: 250px">
+    <p>Project ID: {{ page_data.project.project_id }}</p>
+    <p>Description: {{ page_data.project.description }}</p>
+    <p>Price: {{ page_data.project.price }}</p>
+    <p>Creator: {{ page_data.project.creator.name }} ({{ page_data.project.creator.email }})</p>
+    <!-- <form action="/projects/{{ page_data.project.project_id }}/enrol/" method="POST">
+        <button>Enrol</button>
+    </form>
+    <form action="/projects/{{ page_data.project.project_id }}/drop/" method="POST">
+        <button>Un-Enrol</button>
+    </form> -->
+    <br/><br/>
+
+    <h3>Update Project Info</h3>
+    <form action="/projects/{{ page_data.project.project_id }}/" method="POST">
+        <input type="text" name="project_name" placeholder="Project Name..."/>
+        <input type="text" name="description" placeholder="Description..."/>
+        <input type="number" name="price" placeholder="Price..."/> 
+        <button>Update</button>
+    </form>
+
+    <br/><br/>
+
+    <h3>Update Image:</h3>
+    <form action="/projects/{{ page_data.project.project_id }}/image/" method="POST" enctype = "multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+
+    <br/><br/>
+    
+    <form action = "/projects/{{ page_data.project.project_id }}/delete/", method="POST">
+        <button>DELETE PROJECT</button>
+    </form>
+
+{% endblock %}

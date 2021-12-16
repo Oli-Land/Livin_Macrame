@@ -1,7 +1,7 @@
 from flask import Blueprint, request, render_template, redirect, url_for, abort
 from main import db, lm
 from models.users import User
-from models.courses import Course
+from models.projects import Project
 from schemas.user_schema import user_schema, users_schema, user_update_schema
 from flask_login import login_user, logout_user, login_required, current_user
 from marshmallow import ValidationError
@@ -54,7 +54,7 @@ def log_in():
     user = User.query.filter_by(email=request.form["email"]).first()
     if user and user.check_password(password=request.form["password"]):
         login_user(user)
-        return redirect(url_for('courses.get_courses'))
+        return redirect(url_for('projects.get_projects'))
     
     abort(401, "Login unsuccessful. Did you supply the correct username and password?")
 
@@ -65,7 +65,7 @@ def user_detail():
     if request.method == "GET":
         data = {
             "page_title": "Account Details",
-            "price": db.session.query(func.avg(Course.price)).filter(Course.creator_id==current_user.id).scalar()
+            "projects_count": db.session.query(func.count(Project.project_id)).filter(Project.creator_id==current_user.id).scalar()
         }
         return render_template("user_details.html", page_data = data)
     

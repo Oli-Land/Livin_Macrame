@@ -14,12 +14,11 @@
         </form>
 
         <p>User is admin: {{ current_user.is_admin }}</p>
-        <p>Average price of courses created: {{ page_data.price }}</p>
         <br><br>
-        <h3>Enrolled Courses:</h3>
+        <p>Projects created by {{ current_user.name }}: {{ page_data.projects_count }}</p>
         <ul>
-            {% for course in current_user.enrolled_courses %}
-                <li><a href="/courses/{{ course.course_id }}/">{{ course.course_name }}</a></li>
+            {% for project in current_user.projects %}
+                <li><a href="/projects/{{ project.project_id }}/">{{ project.project_name }}</a></li>
             {% endfor %}
         </ul>
     </div>
