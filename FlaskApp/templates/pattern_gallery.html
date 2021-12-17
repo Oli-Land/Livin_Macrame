@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <br/>
+    <div>
+        <h2>New Pattern</h2>
+        <div>
+            <form action="/patterns/" method="POST">
+                <input type="text" name="pattern_name" placeholder="Pattern Name..."/>
+                <input type="text" name="description" placeholder="Description..."/>
+                <input type="number" name="length" placeholder="Length (cm)..."/>
+                <input type="number" name="width" placeholder="Width (cm)..."/>
+                <button>Create</button>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <h2>Pattern List</h2>
+    <table class="table">
+        <thead>
+            <tr>    
+                <th>Pattern Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        {% for pattern in page_data.patterns %}
+        <tbody>
+            <tr>
+                <td>
+                    <a href="/patterns/{{ pattern.pattern_id }}/">{{ pattern.pattern_name }}</a>
+                </td>
+                <td>
+                    {{ pattern.description }}
+                </td>
+<!--                 <td>
+                    <img src="{{ page_data.image }}" style="width: 250px">
+                </td> -->
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -19,7 +19,7 @@ class Project(db.Model):
     project_name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(200), server_default="No Description Provided")
     price = db.Column(db.Integer(), nullable=False, server_default="0")
-    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin-users.id'))    # add , unique=True) here to make the relationship one-to-one
+    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id'))    # add , unique=True) here to make the relationship one-to-one
 
 #    patterns = db.relationship(
 #        Pattern,

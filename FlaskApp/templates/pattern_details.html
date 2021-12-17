@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>{{ page_data.pattern.pattern_name }}</h2>
+    <img src="{{ page_data.image }}" style="width: 250px">
+    <p>Pattern ID: {{ page_data.pattern.pattern_id }}</p>
+    <p>Description: {{ page_data.pattern.description }}</p>
+    <p>Pattern Length: {{ page_data.pattern.length }}</p>
+    <p>Pattern Width: {{ page_data.pattern.width }}</p>
+
+
+    <br/><br/>
+
+    <h3>Update Pattern Info</h3>
+    <form action="/patterns/{{ page_data.pattern.pattern_id }}/" method="POST">
+        <input type="text" name="pattern_name" placeholder="Pattern Name..."/>
+        <input type="text" name="description" placeholder="Description..."/>
+        <input type="number" name="length" placeholder="Length (cm)..."/>
+        <input type="number" name="width" placeholder="Width (cm)..."/>
+        <button>Update</button>
+    </form>
+
+    <br/><br/>
+
+    <h3>Update Image:</h3>
+    <form action="/patterns/{{ page_data.pattern.pattern_id }}/image/" method="POST" enctype = "multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+
+    <br/><br/>
+    
+    <form action = "/patterns/{{ page_data.pattern.pattern_id }}/delete/", method="POST">
+        <button>DELETE PATTERN</button>
+    </form>
+
+{% endblock %}

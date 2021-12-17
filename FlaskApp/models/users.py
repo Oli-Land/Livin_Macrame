@@ -2,8 +2,9 @@ from main import db
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 
+
 class User(UserMixin, db.Model):
-    __tablename__ = "flasklogin-users"
+    __tablename__ = "flasklogin_users"
     id = db.Column(
         db.Integer,
         primary_key=True        
@@ -33,6 +34,13 @@ class User(UserMixin, db.Model):
         backref="creator",
         lazy="joined"
     )
+
+    """ patterns = db.relationship(
+        'Pattern',
+        backref="creator",
+        lazy="joined"
+    ) """
+
     # To access the list of courses created by Oliver, we call Oliver.courses
     # = [<Course 1>, <Course 2>, ...]
 
