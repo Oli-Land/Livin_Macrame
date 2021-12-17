@@ -19,6 +19,7 @@
             <tr>    
                 <th>Project Name</th>
                 <th>Description</th>
+                <th>Price</th>
             </tr>
         </thead>
         {% for project in page_data.projects %}
@@ -29,6 +30,9 @@
                 </td>
                 <td>
                     {{ project.description }}
+                </td>
+                <td>
+                    {{ project.price }}
                 </td>
                 <td>
                     <img src="{{ project.image_url }}" style="width: 250px">

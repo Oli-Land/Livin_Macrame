@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+    <br/>
+    <div>
+        <h2>New Cord</h2>
+        <div>
+            <form action="/cords/" method="POST">
+                <input type="text" name="cord_name" placeholder="Cord Name..."/>
+                <input type="text" name="description" placeholder="Description..."/>
+                <input type="text" name="material" placeholder="Material..."/>
+                <input type="number" name="thickness" placeholder="Thickness (mm)..."/>
+                <input type="number" name="cost_per_meter" placeholder="Cost per Meter..."/>
+                <button>Create</button>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <h2>Cord List</h2>
+    <table class="table">
+        <thead>
+            <tr>    
+                <th>Cord Name</th>
+                <th>Material</th>
+                <th>Thickness</th>
+                <th>Cost per Meter</th>
+            </tr>
+        </thead>
+        {% for cord in page_data.cords %}
+        <tbody>
+            <tr>
+                <td>
+                    <a href="/cords/{{ cord.cord_id }}/">{{ cord.cord_name }}</a>
+                </td>
+                <td>
+                    {{ cord.material }}
+                </td>
+                <td>
+                    {{ cord.thickness }}
+                </td>
+                <td>
+                    {{ cord.cost_per_meter }}
+                </td>
+                <td>
+                    <img src="{{ cord.image_url }}" style="width: 250px">
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

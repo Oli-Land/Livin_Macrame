@@ -4,6 +4,7 @@ from werkzeug.security import check_password_hash
 from models.patterns import Pattern
 from models.projects import Project
 from models.knots import Knot
+from models.cords import Cord
 
 class User(UserMixin, db.Model):
     __tablename__ = "flasklogin_users"
@@ -45,6 +46,12 @@ class User(UserMixin, db.Model):
 
     knots = db.relationship(
         'Knot',
+        backref="creator",
+        lazy="joined"
+    )
+
+    cords = db.relationship(
+        'Cord',
         backref="creator",
         lazy="joined"
     )

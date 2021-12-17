@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>{{ page_data.cord.cord_name }}</h2>
+    <img src="{{ page_data.image }}" style="width: 250px">
+    <p>Cord ID: {{ page_data.cord.cord_id }}</p>
+    <p>Description: {{ page_data.cord.description }}</p>
+    <p>Material: {{ page_data.cord.material }}</p>
+    <p>Thickness: {{ page_data.cord.thickness }}mm</p>
+    <p>Creator: {{ page_data.cord.creator.name }} ({{ page_data.cord.creator.email }})</p>
+
+
+    <br/><br/>
+
+    <h3>Update Cord Info</h3>
+    <form action="/cords/{{ page_data.cord.cord_id }}/" method="POST">
+        <input type="text" name="cord_name" placeholder="Cord Name..."/>
+        <input type="text" name="description" placeholder="Description..."/>
+        <input type="text" name="material" placeholder="Material..."/>
+        <input type="number" name="thickness" placeholder="Thickness (mm)..."/>
+        <input type="number" name="cost_per_meter" placeholder="Cost per Meter..."/>
+        <button>Update</button>
+    </form>
+
+    <br/><br/>
+
+    <h3>Update Image:</h3>
+    <form action="/cords/{{ page_data.cord.cord_id }}/image/" method="POST" enctype = "multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+
+    <br/><br/>
+    
+    <form action = "/cords/{{ page_data.cord.cord_id }}/delete/", method="POST">
+        <button>DELETE CORD</button>
+    </form>
+
+{% endblock %}
