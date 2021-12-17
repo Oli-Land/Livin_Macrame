@@ -1,16 +1,14 @@
 from main import db
 
 
-class Pattern(db.Model):
-    __tablename__ = "patterns"
+class Knot(db.Model):
+    __tablename__ = "knots"
 
-    pattern_id = db.Column(db.Integer, primary_key=True)
-    pattern_name = db.Column(db.String(80), unique=True, nullable=False)
+    knot_id = db.Column(db.Integer, primary_key=True)
+    knot_name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(200), server_default="No Description Provided")
     length = db.Column(db.Integer)
     width = db.Column(db.Integer)
-    knots_long = db.Column(db.Integer)
-    knots_wide = db.Column(db.Integer)
     num_of_cords = db.Column(db.Integer)
     cords_length = db.Column(db.Integer)
     total_cord = db.Column(db.Integer)
@@ -21,4 +19,4 @@ class Pattern(db.Model):
 
     @property
     def image_filename(self):
-        return f"pattern_images/{self.pattern_id}.png"
+        return f"knot_images/{self.knot_id}.png"

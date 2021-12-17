@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h2>{{ page_data.knot.knot_name }}</h2>
+    <img src="{{ page_data.image }}" style="width: 250px">
+    <p>Knot ID: {{ page_data.knot.knot_id }}</p>
+    <p>Description: {{ page_data.knot.description }}</p>
+    <p>Knot Length: {{ page_data.knot.length }}</p>
+    <p>Knot Width: {{ page_data.knot.width }}</p>
+    <p>Creator: {{ page_data.knot.creator.name }} ({{ page_data.knot.creator.email }})</p>
+
+
+    <br/><br/>
+
+    <h3>Update Knot Info</h3>
+    <form action="/knots/{{ page_data.knot.knot_id }}/" method="POST">
+        <input type="text" name="knot_name" placeholder="Knot Name..."/>
+        <input type="text" name="description" placeholder="Description..."/>
+        <input type="number" name="length" placeholder="Length (cm)..."/>
+        <input type="number" name="width" placeholder="Width (cm)..."/>
+        <button>Update</button>
+    </form>
+
+    <br/><br/>
+
+    <h3>Update Image:</h3>
+    <form action="/knots/{{ page_data.knot.knot_id }}/image/" method="POST" enctype = "multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit">
+    </form>
+
+    <br/><br/>
+    
+    <form action = "/knots/{{ page_data.knot.knot_id }}/delete/", method="POST">
+        <button>DELETE KNOT</button>
+    </form>
+
+{% endblock %}

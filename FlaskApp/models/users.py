@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash
 from models.patterns import Pattern
 from models.projects import Project
+from models.knots import Knot
 
 class User(UserMixin, db.Model):
     __tablename__ = "flasklogin_users"
@@ -42,12 +43,12 @@ class User(UserMixin, db.Model):
         lazy="joined"
     )
 
-    # To access the list of courses created by Oliver, we call Oliver.courses
-    # = [<Course 1>, <Course 2>, ...]
-
+    knots = db.relationship(
+        'Knot',
+        backref="creator",
+        lazy="joined"
+    )
 
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-
-# eg. some_user.check_password(supplied_password)

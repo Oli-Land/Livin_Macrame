@@ -13,6 +13,8 @@ class PatternSchema(ma.SQLAlchemyAutoSchema):
     description = auto_field(validate=Length(min=1))
     length = auto_field()
     width = auto_field()
+    knots_long = auto_field()
+    knots_wide = auto_field()
     num_of_cords = auto_field()
     cords_length = auto_field()
     total_cord = auto_field()

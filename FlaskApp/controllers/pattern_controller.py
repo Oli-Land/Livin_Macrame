@@ -15,22 +15,26 @@ patterns = Blueprint('patterns', __name__)
 @patterns.route("/patterns/", methods=["GET"])
 def get_patterns():
 
-    """ s3_client=boto3.client('s3')
-    bucket_name=current_app.config["AWS_S3_BUCKET"]
-    image_url = s3_client.generate_presigned_url(
-        'get_object',
-        Params={
-            'Bucket': bucket_name,
-            'Key': pattern.image_filename
-        },
-        ExpiresIn=100
-    ) """
-    
     data = {
-    "page_title": "Pattern Gallery",
-    "patterns": patterns_schema.dump(Pattern.query.group_by(Pattern.pattern_id).all())
-    # "image": image_url
+        "page_title": "Pattern Gallery",
+        "patterns": Pattern.query.group_by(Pattern.pattern_id).all()
     }
+
+    for pattern in data["patterns"]:
+        
+        s3_client=boto3.client('s3')
+        bucket_name=current_app.config["AWS_S3_BUCKET"]
+        image_url = s3_client.generate_presigned_url(
+            'get_object',
+            Params={
+                'Bucket': bucket_name,
+                'Key': pattern.image_filename
+            },
+            ExpiresIn=100
+        )
+
+        pattern.image_url = image_url
+
     return render_template("pattern_gallery.html", page_data=data)
 
 

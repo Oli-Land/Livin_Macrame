@@ -2,10 +2,10 @@
 {% block content %}
     <br/>
     <div>
-        <h2>New Pattern</h2>
+        <h2>New Knot</h2>
         <div>
-            <form action="/patterns/" method="POST">
-                <input type="text" name="pattern_name" placeholder="Pattern Name..."/>
+            <form action="/knots/" method="POST">
+                <input type="text" name="knot_name" placeholder="Knot Name..."/>
                 <input type="text" name="description" placeholder="Description..."/>
                 <input type="number" name="length" placeholder="Length (cm)..."/>
                 <input type="number" name="width" placeholder="Width (cm)..."/>
@@ -14,25 +14,25 @@
         </div>
     </div>
     <br/>
-    <h2>Pattern List</h2>
+    <h2>Knot List</h2>
     <table class="table">
         <thead>
             <tr>    
-                <th>Pattern Name</th>
+                <th>Knot Name</th>
                 <th>Description</th>
             </tr>
         </thead>
-        {% for pattern in page_data.patterns %}
+        {% for knot in page_data.knots %}
         <tbody>
             <tr>
                 <td>
-                    <a href="/patterns/{{ pattern.pattern_id }}/">{{ pattern.pattern_name }}</a>
+                    <a href="/knots/{{ knot.knot_id }}/">{{ knot.knot_name }}</a>
                 </td>
                 <td>
-                    {{ pattern.description }}
+                    {{ knot.description }}
                 </td>
                 <td>
-                    <img src="{{ pattern.image_url }}" style="width: 250px">
+                    <img src="{{ knot.image_url }}" style="width: 250px">
                 </td>
             </tr>
         </tbody>
