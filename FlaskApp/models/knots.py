@@ -13,8 +13,8 @@ class Knot(db.Model):
     cords_length = db.Column(db.Integer)
     total_cord = db.Column(db.Integer)
     
-    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id')) 
-    # knot_id = relation
+    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id'))
+    cord_id = db.Column(db.Integer, db.ForeignKey('cords.cord_id'))
 
 
     @property

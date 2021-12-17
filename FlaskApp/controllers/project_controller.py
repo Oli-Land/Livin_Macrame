@@ -57,8 +57,7 @@ def create_project():
     db.session.add(new_project)
     db.session.commit()
 
-    # check 
-    print(project_schema.dump(new_project))
+
     return redirect(url_for("projects.get_projects")) 
 
 

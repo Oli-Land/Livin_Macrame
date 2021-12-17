@@ -11,7 +11,9 @@ class Cord(db.Model):
     thickness = db.Column(db.Integer)
     cost_per_meter = db.Column(db.Integer)
     
-    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id')) 
+    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id'))
+    
+    knots = db.relationship('Knot', backref='cord', lazy="joined")
 
 
     @property

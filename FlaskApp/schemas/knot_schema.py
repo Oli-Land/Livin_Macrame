@@ -18,6 +18,9 @@ class KnotSchema(ma.SQLAlchemyAutoSchema):
         "UserSchema",
         only=("id", "name", "email",)
     )
+    cord = ma.Nested(
+        "CordSchema"
+    )
 
 
     class Meta:

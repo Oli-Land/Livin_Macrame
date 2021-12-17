@@ -19,6 +19,8 @@ class CordSchema(ma.SQLAlchemyAutoSchema):
         only=("id", "name", "email",)
     )
 
+    
+
 
     class Meta:
         model = Cord
