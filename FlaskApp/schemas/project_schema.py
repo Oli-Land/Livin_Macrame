@@ -13,10 +13,10 @@ class ProjectSchema(ma.SQLAlchemyAutoSchema):
     description = auto_field(validate=Length(min=1))
     price = auto_field(required=False)
 
-    """ creator = ma.Nested(
+    creator = ma.Nested(
         "UserSchema",
         only=("id", "name", "email",)
-    ) """
+    )
     
     """ patterns = ma.Nested(
         "PatternSchema",

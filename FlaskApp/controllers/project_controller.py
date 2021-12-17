@@ -23,22 +23,28 @@ def home_page():
 @projects.route("/projects/", methods=["GET"])
 def get_projects():
 
-    """ s3_client=boto3.client('s3')
-    bucket_name=current_app.config["AWS_S3_BUCKET"]
-    image_url = s3_client.generate_presigned_url(
-        'get_object',
-        Params={
-            'Bucket': bucket_name,
-            'Key': project.image_filename
-        },
-        ExpiresIn=100
-    ) """
-    
     data = {
-    "page_title": "Project Gallery",
-    "projects": projects_schema.dump(Project.query.group_by(Project.project_id).all())
-    # "image": image_url
+        "page_title": "Project Gallery",
+        "projects": Project.query.group_by(Project.project_id).all()
     }
+
+    for project in data["projects"]:
+        
+
+        s3_client=boto3.client('s3')
+        bucket_name=current_app.config["AWS_S3_BUCKET"]
+        image_url = s3_client.generate_presigned_url(
+            'get_object',
+            Params={
+                'Bucket': bucket_name,
+                'Key': project.image_filename
+            },
+            ExpiresIn=100
+        )
+
+        project.image_url = image_url
+    
+    
     return render_template("project_gallery.html", page_data=data)
 
 

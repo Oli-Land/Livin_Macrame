@@ -1,5 +1,5 @@
 from main import db
-from models.users import User
+
 
 class Pattern(db.Model):
     __tablename__ = "patterns"
@@ -13,7 +13,7 @@ class Pattern(db.Model):
     cords_length = db.Column(db.Integer)
     total_cord = db.Column(db.Integer)
     
-    #creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id')) 
+    creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id')) 
     # knot_id = relation
 
 

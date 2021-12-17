@@ -1,5 +1,4 @@
 from main import db
-from models.users import User
 #from models.patterns import Pattern
 
 #project_has_pattern = db.Table(
