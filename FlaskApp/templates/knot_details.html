@@ -5,8 +5,10 @@
     <img src="{{ page_data.image }}" style="width: 250px">
     <p>Knot ID: {{ page_data.knot.knot_id }}</p>
     <p>Description: {{ page_data.knot.description }}</p>
-    <p>Knot Length: {{ page_data.knot.length }}</p>
-    <p>Knot Width: {{ page_data.knot.width }}</p>
+    <p>Knot Length: {{ page_data.knot.length }}cm</p>
+    <p>Knot Width: {{ page_data.knot.width }}cm</p>
+    <p>Number of Cords Required: {{ page_data.knot.num_of_cords }}</p>
+    <p>Length of Longest Cord in Knot: {{ page_data.knot.cords_length }}cm</p>
     <p>Creator: {{ page_data.knot.creator.name }} ({{ page_data.knot.creator.email }})</p>
 
 
@@ -16,8 +18,10 @@
     <form action="/knots/{{ page_data.knot.knot_id }}/" method="POST">
         <input type="text" name="knot_name" placeholder="Knot Name..."/>
         <input type="text" name="description" placeholder="Description..."/>
-        <input type="number" name="length" placeholder="Length (cm)..."/>
-        <input type="number" name="width" placeholder="Width (cm)..."/>
+        <input type="number" name="length" placeholder="Length per Knot(cm)..."/>
+        <input type="number" name="width" placeholder="Width per Knot (cm)..."/>
+        <input type="number" name="num_of_cords" placeholder="Number of Cords..."/>
+        <input type="number" name="cords_length" placeholder="Longest Cord (cm)..."/>
         <button>Update</button>
     </form>
 
