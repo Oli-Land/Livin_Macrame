@@ -28,6 +28,9 @@ class PatternSchema(ma.SQLAlchemyAutoSchema):
         "KnotSchema"
     )
 
+    projects = ma.Nested(
+        "ProjectSchema"
+    )
 
     class Meta:
         model = Pattern

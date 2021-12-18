@@ -5,6 +5,9 @@ from schemas.project_schema import project_schema, projects_schema
 from flask_login import login_required, current_user
 import boto3
 
+from models.patterns import Pattern
+from schemas.pattern_schema import pattern_schema
+
 projects = Blueprint('projects', __name__)
 
 
@@ -82,6 +85,7 @@ def get_project(id):
         "project": project_schema.dump(project),
         "image": image_url
     }
+
     return render_template("project_details.html", page_data=data)
 
 
@@ -106,23 +110,6 @@ def update_project(id):
     }
     return render_template("project_details.html", page_data=data)
 
-# Add pattern to project
-""" @projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
-@login_required
-def add_to_project(id):
-    project = Project.query.get_or_404(id)
-    project.patterns.append(current_pattern)
-    db.session.commit()
-    return redirect(url_for('project.project_details')) """
-
-# Remove pattern from project
-""" @projects.route("/projects/<int:id>/drop/", methods=["POST"])
-@login_required
-def remove_pattern(id):
-    project = Project.query.get_or_404(id)
-    project.students.remove(current_user)
-    db.session.commit()
-    return redirect(url_for('users.user_detail')) """
 
 # The DELETE endpoint
 @projects.route("/projects/<int:id>/delete/", methods=["POST"])
@@ -136,4 +123,27 @@ def delete_project(id):
     db.session.delete(project)
     db.session.commit()
     return redirect(url_for("projects.get_projects"))
+
+
+# Add pattern to project
+@projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
+@login_required
+def add_pattern_to_project(id):
+    project = Project.query.get_or_404(id)
+    current_pattern_id = pattern_schema.dump(request.form)
+    current_pattern = Pattern.query.get_or_404(current_pattern_id)
+    project.patterns.append(current_pattern)
+    db.session.commit()
+    
+    return redirect(url_for('projects.get_project', id=id))
+
+# Remove pattern from project
+@projects.route("/projects/<int:id>/remove_pattern/", methods=["POST"])
+@login_required
+def remove_pattern(id):
+    project = Project.query.get_or_404(id)
+    current_pattern_id = pattern_schema.dump(request.form)
+    current_pattern = Pattern.query.get_or_404(current_pattern_id)
+    project.patterns.remove(current_pattern)
+    return redirect(url_for('users.user_detail'))
 

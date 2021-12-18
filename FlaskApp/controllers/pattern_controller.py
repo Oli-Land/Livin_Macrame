@@ -121,7 +121,6 @@ def add_knot_to_pattern(id):
     current_knot_id = knot_schema.dump(request.form)
     current_knot = Knot.query.get_or_404(current_knot_id)
     pattern.knot = current_knot
-    print(pattern.knot.knot_id)
     db.session.commit()
     return redirect(url_for('patterns.get_pattern', id=id))
 

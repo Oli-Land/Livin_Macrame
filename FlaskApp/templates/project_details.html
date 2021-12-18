@@ -10,6 +10,29 @@
 
     <br/><br/>
 
+
+    <h3>Patterns in Project:</h3>
+    <ul>
+        {% for pattern in page_data.project.patterns %}
+            <li>ID: {{ pattern.pattern_id }}
+                <a href="/patterns/{{ pattern.pattern_id }}/">{{ pattern.pattern_name }}</a>
+                
+            </li>            
+                
+        {% endfor %}
+    </ul>
+
+    <form action="/projects/{{ page_data.project.project_id }}/add_pattern/" method="POST">
+        <input type="number" name="pattern_id" placeholder="ID of Pattern to Include..."/>
+        <button>Include Pattern</button>
+    </form>
+    <form action="/projects/{{ page_data.project.project_id }}/remove_pattern/" method="POST">
+        <input type="number" name="pattern_id" placeholder="ID of Pattern to Remove..."/>
+        <button>REMOVE Pattern</button>
+    </form>
+
+    <br/><br/>
+
     <h3>Update Project Info</h3>
     <form action="/projects/{{ page_data.project.project_id }}/" method="POST">
         <input type="text" name="project_name" placeholder="Project Name..."/>

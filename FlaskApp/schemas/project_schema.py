@@ -18,10 +18,9 @@ class ProjectSchema(ma.SQLAlchemyAutoSchema):
         only=("id", "name", "email",)
     )
     
-    """ patterns = ma.Nested(
-        "PatternSchema",
-        only=("id", "name", "email",)
-    ) """
+    patterns = ma.Nested(
+        "PatternSchema", many=True        
+    )
 
     #metadata about the projectSchema class
     class Meta:
