@@ -5,6 +5,9 @@ from schemas.knot_schema import knot_schema, knots_schema
 from flask_login import login_required, current_user
 import boto3
 
+from models.cords import Cord
+from schemas.cord_schema import cord_schema
+
 knots = Blueprint('knots', __name__)
 
 
@@ -97,23 +100,6 @@ def update_knot(id):
     }
     return render_template("knot_details.html", page_data=data)
 
-# Add pattern to project
-""" @projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
-@login_required
-def add_to_project(id):
-    project = Project.query.get_or_404(id)
-    project.patterns.append(current_pattern)
-    db.session.commit()
-    return redirect(url_for('project.project_details')) """
-
-# Remove pattern from project
-""" @projects.route("/projects/<int:id>/drop/", methods=["POST"])
-@login_required
-def remove_pattern(id):
-    project = Project.query.get_or_404(id)
-    project.students.remove(current_user)
-    db.session.commit()
-    return redirect(url_for('users.user_detail')) """
 
 # The DELETE endpoint
 @knots.route("/knots/<int:id>/delete/", methods=["POST"])
@@ -128,3 +114,22 @@ def delete_knot(id):
     db.session.commit()
     return redirect(url_for("knots.get_knots"))
 
+# Add cord to knot
+@knots.route("/knots/<int:id>/add_cord/", methods=["POST"])
+@login_required
+def add_to_knot(id):
+    knot = Knot.query.get_or_404(id) 
+    current_cord_id = cord_schema.dump(request.form)
+    current_cord = Cord.query.get_or_404(current_cord_id)
+    knot.cord = current_cord
+    db.session.commit()
+    return redirect(url_for('knots.get_knot', id=id))
+
+# Remove cord from knot
+@knots.route("/knots/<int:id>/remove_cord/", methods=["POST"])
+@login_required
+def remove_from_knot(id):
+    knot = Knot.query.get_or_404(id)
+    knot.cord = None
+    db.session.commit()
+    return redirect(url_for('knots.get_knot', id=id))

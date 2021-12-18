@@ -11,6 +11,19 @@
     <p>Length of Longest Cord in Knot: {{ page_data.knot.cords_length }}cm</p>
     <p>Creator: {{ page_data.knot.creator.name }} ({{ page_data.knot.creator.email }})</p>
 
+    <br/><br/>
+    
+    <h3>Cord Used</h3>
+    <a href="/cords/{{ page_data.knot.cord.cord_id }}/">{{ page_data.knot.cord.cord_name }}</a>
+    <p>Cord ID: ({{ page_data.knot.cord.cord_id }})</p>
+    <h4>Choose Cord (ID)</h4>
+    <form action="/knots/{{ page_data.knot.knot_id }}/add_cord/" method="POST">
+        <input type="number" name="cord_id" placeholder="ID of Cord used..."/>
+        <button>Select Cord</button>
+    </form>
+    <form action="/knots/{{ page_data.knot.knot_id }}/remove_cord/" method="POST">
+        <button>REMOVE from Knot</button>
+    </form>
 
     <br/><br/>
 
