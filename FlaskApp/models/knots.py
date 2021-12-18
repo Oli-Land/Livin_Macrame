@@ -16,6 +16,8 @@ class Knot(db.Model):
     creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id'))
     cord_id = db.Column(db.Integer, db.ForeignKey('cords.cord_id'))
 
+    patterns = db.relationship('Pattern', backref='knot', lazy="joined")
+
 
     @property
     def image_filename(self):

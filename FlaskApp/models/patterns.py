@@ -16,7 +16,7 @@ class Pattern(db.Model):
     total_cord = db.Column(db.Integer)
     
     creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id')) 
-    # knot_id = relation
+    knot_id = db.Column(db.Integer, db.ForeignKey('knots.knot_id'))
 
 
     @property

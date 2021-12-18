@@ -24,12 +24,9 @@ class PatternSchema(ma.SQLAlchemyAutoSchema):
         only=("id", "name", "email",)
     )
 
-
-
-    """ patterns = ma.Nested(
-        "PatternSchema",
-        only=("id", "name", "email",)
-    ) """
+    knot = ma.Nested(
+        "KnotSchema"
+    )
 
 
     class Meta:

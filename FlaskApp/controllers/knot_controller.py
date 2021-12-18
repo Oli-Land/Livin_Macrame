@@ -117,7 +117,7 @@ def delete_knot(id):
 # Add cord to knot
 @knots.route("/knots/<int:id>/add_cord/", methods=["POST"])
 @login_required
-def add_to_knot(id):
+def add_cord_to_knot(id):
     knot = Knot.query.get_or_404(id) 
     current_cord_id = cord_schema.dump(request.form)
     current_cord = Cord.query.get_or_404(current_cord_id)
@@ -128,7 +128,7 @@ def add_to_knot(id):
 # Remove cord from knot
 @knots.route("/knots/<int:id>/remove_cord/", methods=["POST"])
 @login_required
-def remove_from_knot(id):
+def remove_cord_from_knot(id):
     knot = Knot.query.get_or_404(id)
     knot.cord = None
     db.session.commit()

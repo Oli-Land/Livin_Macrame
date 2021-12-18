@@ -12,6 +12,22 @@
 
     <br/><br/>
 
+
+    <h3>Knot Used</h3>
+    <a href="/knots/{{ page_data.pattern.knot.knot_id }}/">{{ page_data.pattern.knot.knot_name }}</a>
+    <p>Knot ID: ({{ page_data.pattern.knot.knot_id }})</p>
+    <p>Knot length: ({{ page_data.pattern.knot.length }})</p>
+    <h4>Choose Knot (ID)</h4>
+    <form action="/patterns/{{ page_data.pattern.pattern_id }}/add_knot/" method="POST">
+        <input type="number" name="knot_id" placeholder="ID of Knot used..."/>
+        <button>Select Knot</button>
+    </form>
+    <form action="/patterns/{{ page_data.pattern.pattern_id }}/remove_knot/" method="POST">
+        <button>REMOVE from pattern</button>
+    </form>
+
+    <br/><br/>
+
     <h3>Update Pattern Info</h3>
     <form action="/patterns/{{ page_data.pattern.pattern_id }}/" method="POST">
         <input type="text" name="pattern_name" placeholder="Pattern Name..."/>

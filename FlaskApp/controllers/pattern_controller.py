@@ -5,6 +5,9 @@ from schemas.pattern_schema import pattern_schema, patterns_schema
 from flask_login import login_required, current_user
 import boto3
 
+from models.knots import Knot
+from schemas.knot_schema import knot_schema
+
 patterns = Blueprint('patterns', __name__)
 
 
@@ -95,23 +98,6 @@ def update_pattern(id):
     }
     return render_template("pattern_details.html", page_data=data)
 
-# Add pattern to project
-""" @projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
-@login_required
-def add_to_project(id):
-    project = Project.query.get_or_404(id)
-    project.patterns.append(current_pattern)
-    db.session.commit()
-    return redirect(url_for('project.project_details')) """
-
-# Remove pattern from project
-""" @projects.route("/projects/<int:id>/drop/", methods=["POST"])
-@login_required
-def remove_pattern(id):
-    project = Project.query.get_or_404(id)
-    project.students.remove(current_user)
-    db.session.commit()
-    return redirect(url_for('users.user_detail')) """
 
 # The DELETE endpoint
 @patterns.route("/patterns/<int:id>/delete/", methods=["POST"])
@@ -125,4 +111,28 @@ def delete_pattern(id):
     db.session.delete(pattern)
     db.session.commit()
     return redirect(url_for("patterns.get_patterns"))
+
+
+# Add knot to pattern
+@patterns.route("/patterns/<int:id>/add_knot/", methods=["POST"])
+@login_required
+def add_knot_to_pattern(id):
+    pattern = Pattern.query.get_or_404(id) 
+    current_knot_id = knot_schema.dump(request.form)
+    current_knot = Knot.query.get_or_404(current_knot_id)
+    pattern.knot = current_knot
+    print(pattern.knot.knot_id)
+    db.session.commit()
+    return redirect(url_for('patterns.get_pattern', id=id))
+
+
+# Remove knot from pattern
+@patterns.route("/patterns/<int:id>/remove_knot/", methods=["POST"])
+@login_required
+def remove_knot_from_pattern(id):
+    pattern = Pattern.query.get_or_404(id) 
+    pattern.knot = None
+    db.session.commit()
+    return redirect(url_for('patterns.get_pattern', id=id))
+
 

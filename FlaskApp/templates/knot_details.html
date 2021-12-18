@@ -16,6 +16,7 @@
     <h3>Cord Used</h3>
     <a href="/cords/{{ page_data.knot.cord.cord_id }}/">{{ page_data.knot.cord.cord_name }}</a>
     <p>Cord ID: ({{ page_data.knot.cord.cord_id }})</p>
+    <p>Cord cost: ({{ page_data.knot.cord.cost_per_meter }})</p>
     <h4>Choose Cord (ID)</h4>
     <form action="/knots/{{ page_data.knot.knot_id }}/add_cord/" method="POST">
         <input type="number" name="cord_id" placeholder="ID of Cord used..."/>
