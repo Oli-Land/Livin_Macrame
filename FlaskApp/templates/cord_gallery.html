@@ -18,7 +18,8 @@
     <h2>Cord List</h2>
     <table class="table">
         <thead>
-            <tr>    
+            <tr>
+                <th>Cord ID</th>    
                 <th>Cord Name</th>
                 <th>Material</th>
                 <th>Thickness</th>
@@ -28,6 +29,9 @@
         {% for cord in page_data.cords %}
         <tbody>
             <tr>
+                <td>
+                    {{ cord.cord_id }}
+                </td>
                 <td>
                     <a href="/cords/{{ cord.cord_id }}/">{{ cord.cord_name }}</a>
                 </td>

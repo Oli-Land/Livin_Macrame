@@ -17,7 +17,7 @@ def get_cords():
 
     data = {
         "page_title": "Cord Gallery",
-        "cords": Cord.query.group_by(Cord.cord_id).all()
+        "cords": Cord.query.order_by(Cord.cord_id).all()
     }
 
     for cord in data["cords"]:

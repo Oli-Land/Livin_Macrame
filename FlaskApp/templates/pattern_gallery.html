@@ -17,7 +17,8 @@
     <h2>Pattern List</h2>
     <table class="table">
         <thead>
-            <tr>    
+            <tr>
+                <th>Pattern ID</th>    
                 <th>Pattern Name</th>
                 <th>Description</th>
             </tr>
@@ -25,6 +26,9 @@
         {% for pattern in page_data.patterns %}
         <tbody>
             <tr>
+                <td>
+                    {{ pattern.pattern_id }}
+                </td>
                 <td>
                     <a href="/patterns/{{ pattern.pattern_id }}/">{{ pattern.pattern_name }}</a>
                 </td>

@@ -20,7 +20,7 @@ def get_knots():
 
     data = {
         "page_title": "Knot Gallery",
-        "knots": Knot.query.group_by(Knot.knot_id).all()
+        "knots": Knot.query.order_by(Knot.knot_id).all()
     }
 
     for knot in data["knots"]:

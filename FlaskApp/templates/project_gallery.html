@@ -16,7 +16,8 @@
     <h2>Project List</h2>
     <table class="table">
         <thead>
-            <tr>    
+            <tr>
+                <th>Project ID</th>    
                 <th>Project Name</th>
                 <th>Description</th>
                 <th>Price</th>
@@ -25,6 +26,9 @@
         {% for project in page_data.projects %}
         <tbody>
             <tr>
+                <td>
+                    {{ project.project_id }}
+                </td>
                 <td>
                     <a href="/projects/{{ project.project_id }}/">{{ project.project_name }}</a>
                 </td>

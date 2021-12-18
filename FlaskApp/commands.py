@@ -22,7 +22,7 @@ def seed_db():
     from faker import Faker
     faker = Faker()
 
-    for i in range(20):
+    for i in range(10):
         project = Project(faker.catch_phrase())
         db.session.add(project)
 
@@ -42,10 +42,14 @@ def reset_db():
 
     from models.projects import Project
     from faker import Faker
+    from random import randint
     faker = Faker()
 
-    for i in range(20):
-        project = Project(faker.catch_phrase())
+    for i in range(10):
+        project = Project()
+        project.project_name = faker.catch_phrase()
+        project.description = faker.catch_phrase()
+        project.price = randint(1,500)
         db.session.add(project)
 
     db.session.commit()

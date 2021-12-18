@@ -20,7 +20,7 @@ def get_patterns():
 
     data = {
         "page_title": "Pattern Gallery",
-        "patterns": Pattern.query.group_by(Pattern.pattern_id).all()
+        "patterns": Pattern.query.order_by(Pattern.pattern_id).all()
     }
 
     for pattern in data["patterns"]:

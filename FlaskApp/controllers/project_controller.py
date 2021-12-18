@@ -28,7 +28,7 @@ def get_projects():
 
     data = {
         "page_title": "Project Gallery",
-        "projects": Project.query.group_by(Project.project_id).all()
+        "projects": Project.query.order_by(Project.project_id).all()
     }
 
     for project in data["projects"]:
