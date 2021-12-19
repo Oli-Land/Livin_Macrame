@@ -82,14 +82,21 @@ def get_project(id):
     )
 
 
-    # project_cord_cost = total 
+    project_total_cord = 0
+    project_total_cost = 0
+    for pattern in project.patterns:
+        if pattern.total_cord and pattern.knot.cord:
+            project_total_cord += pattern.total_cord
+            project_total_cost += (pattern.knot.cord.cost_per_meter * pattern.total_cord)
+
 
     data = {
         "page_title": "Project Details",
         "project": project_schema.dump(project),
-        "image": image_url
-        # "project_total_cord": db.session.query(func.sum(Pattern.total_cord)).filter(id in Pattern.projects).scalar()
-
+        "image": image_url,
+        "project_total_cord": project_total_cord,
+        "project_total_cost": project_total_cost
+        
     }
 
     return render_template("project_details.html", page_data=data)
