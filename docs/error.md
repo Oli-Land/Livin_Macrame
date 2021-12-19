@@ -1,1 +1,0 @@
-sqlalchemy.exc.InvalidRequestError: When initializing mapper mapped class User->flasklogin-users, expression 'Pattern' failed to locate a name ('Pattern'). If this is a class name, consider adding this relationship() to the <class 'models.users.User'> class after both dependent classes have been defined.
