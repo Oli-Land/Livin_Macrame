@@ -80,6 +80,8 @@ def get_project(id):
         ExpiresIn=100
     )
 
+    project_cord_cost = total 
+
     data = {
         "page_title": "Project Details",
         "project": project_schema.dump(project),

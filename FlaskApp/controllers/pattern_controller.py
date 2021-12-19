@@ -122,6 +122,18 @@ def add_knot_to_pattern(id):
     current_knot = Knot.query.get_or_404(current_knot_id)
     pattern.knot = current_knot
     db.session.commit()
+
+#"projects_count": db.session.query(func.count(Project.project_id)).filter(Project.creator_id==current_user.id).scalar()
+
+
+    # query pattern.knot
+    # 
+    """ knots_long = db.Column(db.Integer)
+    knots_wide = db.Column(db.Integer)
+    num_of_cords = db.Column(db.Integer)
+    cords_length = db.Column(db.Integer)
+    total_cord 
+ """
     return redirect(url_for('patterns.get_pattern', id=id))
 
 

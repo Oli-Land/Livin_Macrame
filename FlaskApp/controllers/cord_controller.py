@@ -97,23 +97,6 @@ def update_cord(id):
     }
     return render_template("cord_details.html", page_data=data)
 
-# Add pattern to project
-""" @projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
-@login_required
-def add_to_project(id):
-    project = Project.query.get_or_404(id)
-    project.patterns.append(current_pattern)
-    db.session.commit()
-    return redirect(url_for('project.project_details')) """
-
-# Remove pattern from project
-""" @projects.route("/projects/<int:id>/drop/", methods=["POST"])
-@login_required
-def remove_pattern(id):
-    project = Project.query.get_or_404(id)
-    project.students.remove(current_user)
-    db.session.commit()
-    return redirect(url_for('users.user_detail')) """
 
 # The DELETE endpoint
 @cords.route("/cords/<int:id>/delete/", methods=["POST"])

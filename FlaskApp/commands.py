@@ -1,5 +1,6 @@
 from main import db
 from flask import Blueprint
+import os
 
 db_commands = Blueprint("db-custom", __name__)
 
@@ -54,3 +55,11 @@ def reset_db():
 
     db.session.commit()
     print("Tables seeded!")
+
+@db_commands.cli.command("dump")
+def dump_db():
+
+    db_name = os.environ.get("DB_NAME")
+    db_user = os.environ.get("DB_USER")
+
+    os.system(f" pg_dump {db_name} -U {db_user} > db_dump.txt")
