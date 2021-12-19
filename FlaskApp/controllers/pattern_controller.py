@@ -14,7 +14,7 @@ patterns = Blueprint('patterns', __name__)
 ### VIEWS ###
 
 
-# The GET routes endpoint
+# The GET endpoint
 @patterns.route("/patterns/", methods=["GET"])
 def get_patterns():
 
@@ -41,7 +41,7 @@ def get_patterns():
     return render_template("pattern_gallery.html", page_data=data)
 
 
-# The POST route endpoint
+# The POST endpoint
 @patterns.route("/patterns/", methods=["POST"])
 @login_required
 def create_pattern():
@@ -53,7 +53,7 @@ def create_pattern():
     return redirect(url_for("patterns.get_pattern", id=new_pattern.pattern_id)) 
 
 
-# The GET specific route endpoint
+# The GET specific endpoint
 @patterns.route("/patterns/<int:id>/", methods=["GET"])
 def get_pattern(id):
     pattern = Pattern.query.get_or_404(id)
@@ -77,7 +77,7 @@ def get_pattern(id):
     return render_template("pattern_details.html", page_data=data)
 
 
-# The PUT/PATCH route
+# The PUT/PATCH endpoint
 @patterns.route("/patterns/<int:id>/", methods=["POST"])
 @login_required
 def update_pattern(id):
@@ -124,7 +124,7 @@ def delete_pattern(id):
     return redirect(url_for("patterns.get_patterns"))
 
 
-# Add knot to pattern
+# Add knot to pattern endpoint
 @patterns.route("/patterns/<int:id>/add_knot/", methods=["POST"])
 @login_required
 def add_knot_to_pattern(id):
@@ -144,7 +144,7 @@ def add_knot_to_pattern(id):
     return redirect(url_for('patterns.get_pattern', id=id))
 
 
-# Remove knot from pattern
+# Remove knot from pattern endpoint
 @patterns.route("/patterns/<int:id>/remove_knot/", methods=["POST"])
 @login_required
 def remove_knot_from_pattern(id):

@@ -20,7 +20,7 @@ def unauthorized():
 
 users = Blueprint('users', __name__)
 
-# The get routes endpoint.
+# The get users endpoint.
 @users.route("/users/", methods=["GET"])
 def get_users():
     data = {
@@ -29,7 +29,7 @@ def get_users():
     }
     return render_template("user_index.html", page_data = data)
 
-# The signup route endpoint.
+# The signup endpoint.
 @users.route("/users/signup/", methods=["GET", "POST"])
 def sign_up():
     data = {"page_title": "Sign Up"}
@@ -43,7 +43,7 @@ def sign_up():
     login_user(new_user)
     return redirect(url_for("users.get_users"))
 
-# The login route
+# The login endpoint
 @users.route("/users/login/", methods=["GET", "POST"])
 def log_in():
     data = {"page_title": "Log In"}
@@ -58,7 +58,7 @@ def log_in():
     
     abort(401, "Login unsuccessful. Did you supply the correct username and password?")
 
-# User details
+# User details endpoint
 @users.route("/users/account/", methods=["GET", "POST"])
 @login_required
 def user_detail():
@@ -81,7 +81,7 @@ def user_detail():
     db.session.commit()
     return redirect(url_for("users.get_users"))
 
-# Logout
+# Logout endpoint
 @users.route("/users/logout/", methods=["POST"])
 @login_required
 def log_out():

@@ -14,7 +14,7 @@ knots = Blueprint('knots', __name__)
 ### VIEWS ###
 
 
-# The GET routes endpoint
+# The GET endpoint
 @knots.route("/knots/", methods=["GET"])
 def get_knots():
 
@@ -43,7 +43,7 @@ def get_knots():
     return render_template("knot_gallery.html", page_data=data)
 
 
-# The POST route endpoint
+# The POST endpoint
 @knots.route("/knots/", methods=["POST"])
 @login_required
 def create_knot():
@@ -55,7 +55,7 @@ def create_knot():
     return redirect(url_for("knots.get_knot", id=new_knot.knot_id)) 
 
 
-# The GET specific route endpoint
+# The GET specific endpoint
 @knots.route("/knots/<int:id>/", methods=["GET"])
 def get_knot(id):
     knot = Knot.query.get_or_404(id)
@@ -79,7 +79,7 @@ def get_knot(id):
     return render_template("knot_details.html", page_data=data)
 
 
-# The PUT/PATCH route
+# The PUT/PATCH endpoint
 @knots.route("/knots/<int:id>/", methods=["POST"])
 @login_required
 def update_knot(id):
@@ -114,7 +114,7 @@ def delete_knot(id):
     db.session.commit()
     return redirect(url_for("knots.get_knots"))
 
-# Add cord to knot
+# Add cord to knot endpoint
 @knots.route("/knots/<int:id>/add_cord/", methods=["POST"])
 @login_required
 def add_cord_to_knot(id):
@@ -125,7 +125,7 @@ def add_cord_to_knot(id):
     db.session.commit()
     return redirect(url_for('knots.get_knot', id=id))
 
-# Remove cord from knot
+# Remove cord from knot endpoint
 @knots.route("/knots/<int:id>/remove_cord/", methods=["POST"])
 @login_required
 def remove_cord_from_knot(id):

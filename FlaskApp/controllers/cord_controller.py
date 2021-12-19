@@ -11,7 +11,7 @@ cords = Blueprint('cords', __name__)
 ### VIEWS ###
 
 
-# The GET routes endpoint
+# The GET endpoint
 @cords.route("/cords/", methods=["GET"])
 def get_cords():
 
@@ -40,7 +40,7 @@ def get_cords():
     return render_template("cord_gallery.html", page_data=data)
 
 
-# The POST route endpoint
+# The POST endpoint
 @cords.route("/cords/", methods=["POST"])
 @login_required
 def create_cord():
@@ -52,7 +52,7 @@ def create_cord():
     return redirect(url_for("cords.get_cord", id=new_cord.cord_id)) 
 
 
-# The GET specific route endpoint
+# The GET specific endpoint
 @cords.route("/cords/<int:id>/", methods=["GET"])
 def get_cord(id):
     cord = Cord.query.get_or_404(id)
@@ -76,7 +76,7 @@ def get_cord(id):
     return render_template("cord_details.html", page_data=data)
 
 
-# The PUT/PATCH route
+# The PUT/PATCH endpoint
 @cords.route("/cords/<int:id>/", methods=["POST"])
 @login_required
 def update_cord(id):

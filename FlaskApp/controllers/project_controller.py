@@ -13,7 +13,7 @@ projects = Blueprint('projects', __name__)
 
 ### VIEWS ###
 
-# Homepage route endpoint
+# Homepage endpoint
 @projects.route('/')
 def home_page():
     data = {
@@ -22,7 +22,7 @@ def home_page():
     return render_template("homepage.html", page_data=data)
 
 
-# The GET routes endpoint
+# The GET endpoint
 @projects.route("/projects/", methods=["GET"])
 def get_projects():
 
@@ -51,7 +51,7 @@ def get_projects():
     return render_template("project_gallery.html", page_data=data)
 
 
-# The POST route endpoint
+# The POST endpoint
 @projects.route("/projects/", methods=["POST"])
 @login_required
 def create_project():
@@ -64,7 +64,7 @@ def create_project():
     return redirect(url_for("projects.get_project", id=new_project.project_id)) 
 
 
-# The GET specific route endpoint
+# The GET specific endpoint
 @projects.route("/projects/<int:id>/", methods=["GET"])
 def get_project(id):
     project = Project.query.get_or_404(id)
@@ -91,7 +91,7 @@ def get_project(id):
     return render_template("project_details.html", page_data=data)
 
 
-# The PUT/PATCH route
+# The PUT/PATCH endpoint
 @projects.route("/projects/<int:id>/", methods=["POST"])
 @login_required
 def update_project(id):
@@ -127,7 +127,7 @@ def delete_project(id):
     return redirect(url_for("projects.get_projects"))
 
 
-# Add pattern to project
+# Add pattern to project endpoint
 @projects.route("/projects/<int:id>/add_pattern/", methods=["POST"])
 @login_required
 def add_pattern_to_project(id):
@@ -136,10 +136,9 @@ def add_pattern_to_project(id):
     current_pattern = Pattern.query.get_or_404(current_pattern_id)
     project.patterns.append(current_pattern)
     db.session.commit()
-    
     return redirect(url_for('projects.get_project', id=id))
 
-# Remove pattern from project
+# Remove pattern from project endpoint
 @projects.route("/projects/<int:id>/remove_pattern/", methods=["POST"])
 @login_required
 def remove_pattern(id):
@@ -147,5 +146,6 @@ def remove_pattern(id):
     current_pattern_id = pattern_schema.dump(request.form)
     current_pattern = Pattern.query.get_or_404(current_pattern_id)
     project.patterns.remove(current_pattern)
-    return redirect(url_for('users.user_detail'))
+    db.session.commit()
+    return redirect(url_for('projects.get_project', id=id))
 
