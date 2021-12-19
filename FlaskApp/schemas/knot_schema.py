@@ -12,7 +12,7 @@ class KnotSchema(ma.SQLAlchemyAutoSchema):
     width = auto_field()
     num_of_cords = auto_field()
     cords_length = auto_field()
-    total_cord = auto_field()
+
 
     creator = ma.Nested(
         "UserSchema",

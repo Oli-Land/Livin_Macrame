@@ -50,7 +50,7 @@ def create_pattern():
     db.session.add(new_pattern)
     db.session.commit()
 
-    return redirect(url_for("patterns.get_patterns")) 
+    return redirect(url_for("patterns.get_pattern", id=new_pattern.pattern_id)) 
 
 
 # The GET specific route endpoint
@@ -90,11 +90,22 @@ def update_pattern(id):
     updated_fields = pattern_schema.dump(request.form)
     if updated_fields:
         pattern.update(updated_fields)
+
+        db.session.commit()
+
+        pattern = Pattern.query.get_or_404(id)
+
+        pattern.knots_long = pattern.length // pattern.knot.length
+        pattern.knots_wide = pattern.width // pattern.knot.width
+        pattern.num_of_cords = pattern.knots_wide * pattern.knot.num_of_cords
+        pattern.cords_length = pattern.knots_long * pattern.knot.cords_length
+        pattern.total_cord = pattern.num_of_cords * pattern.cords_length
+
         db.session.commit()
     
     data = {
         "page_title": "Pattern Details",
-        "pattern": pattern_schema.dump(pattern.first())
+        "pattern": pattern_schema.dump(pattern)
     }
     return render_template("pattern_details.html", page_data=data)
 
@@ -121,19 +132,15 @@ def add_knot_to_pattern(id):
     current_knot_id = knot_schema.dump(request.form)
     current_knot = Knot.query.get_or_404(current_knot_id)
     pattern.knot = current_knot
+     
+    pattern.knots_long = pattern.length // pattern.knot.length
+    pattern.knots_wide = pattern.width // pattern.knot.width
+    pattern.num_of_cords = pattern.knots_wide * pattern.knot.num_of_cords
+    pattern.cords_length = pattern.knots_long * pattern.knot.cords_length
+    pattern.total_cord = pattern.num_of_cords * pattern.cords_length
+
     db.session.commit()
 
-#"projects_count": db.session.query(func.count(Project.project_id)).filter(Project.creator_id==current_user.id).scalar()
-
-
-    # query pattern.knot
-    # 
-    """ knots_long = db.Column(db.Integer)
-    knots_wide = db.Column(db.Integer)
-    num_of_cords = db.Column(db.Integer)
-    cords_length = db.Column(db.Integer)
-    total_cord 
- """
     return redirect(url_for('patterns.get_pattern', id=id))
 
 

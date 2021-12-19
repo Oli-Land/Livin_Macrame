@@ -9,10 +9,8 @@ project_has_pattern = db.Table(
 )
 
 
-
 class Project(db.Model):
     __tablename__ = "projects"
-
 
     project_id = db.Column(db.Integer, primary_key=True)
     project_name = db.Column(db.String(80), unique=True, nullable=False)

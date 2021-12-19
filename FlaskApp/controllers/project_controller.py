@@ -61,7 +61,7 @@ def create_project():
     db.session.commit()
 
 
-    return redirect(url_for("projects.get_projects")) 
+    return redirect(url_for("projects.get_project", id=new_project.project_id)) 
 
 
 # The GET specific route endpoint
@@ -80,7 +80,7 @@ def get_project(id):
         ExpiresIn=100
     )
 
-    project_cord_cost = total 
+    # project_cord_cost = total 
 
     data = {
         "page_title": "Project Details",

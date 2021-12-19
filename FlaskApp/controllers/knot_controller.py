@@ -52,7 +52,7 @@ def create_knot():
     db.session.add(new_knot)
     db.session.commit()
 
-    return redirect(url_for("knots.get_knots")) 
+    return redirect(url_for("knots.get_knot", id=new_knot.knot_id)) 
 
 
 # The GET specific route endpoint

@@ -8,15 +8,17 @@
     <p>Knot Length: {{ page_data.knot.length }}cm</p>
     <p>Knot Width: {{ page_data.knot.width }}cm</p>
     <p>Number of Cords Required: {{ page_data.knot.num_of_cords }}</p>
-    <p>Length of Longest Cord in Knot: {{ page_data.knot.cords_length }}cm</p>
+    <p>Length of Each Cord in Knot: {{ page_data.knot.cords_length }}cm</p>
+    <p>Total Cord used in Knot: {{ page_data.knot.num_of_cords * page_data.knot.cords_length }}cm</p>
+
     <p>Creator: {{ page_data.knot.creator.name }} ({{ page_data.knot.creator.email }})</p>
+
 
     <br/><br/>
     
     <h3>Cord Used</h3>
     <a href="/cords/{{ page_data.knot.cord.cord_id }}/">{{ page_data.knot.cord.cord_name }}</a>
     <p>Cord ID: ({{ page_data.knot.cord.cord_id }})</p>
-    <p>Cord cost: ({{ page_data.knot.cord.cost_per_meter }})</p>
     <h4>Choose Cord (ID)</h4>
     <form action="/knots/{{ page_data.knot.knot_id }}/add_cord/" method="POST">
         <input type="number" name="cord_id" placeholder="ID of Cord used..."/>

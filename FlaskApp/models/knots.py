@@ -11,7 +11,6 @@ class Knot(db.Model):
     width = db.Column(db.Integer)
     num_of_cords = db.Column(db.Integer)
     cords_length = db.Column(db.Integer)
-    total_cord = db.Column(db.Integer)
     
     creator_id = db.Column(db.Integer, db.ForeignKey('flasklogin_users.id'))
     cord_id = db.Column(db.Integer, db.ForeignKey('cords.cord_id'))

@@ -5,8 +5,13 @@
     <img src="{{ page_data.image }}" style="width: 250px">
     <p>Pattern ID: {{ page_data.pattern.pattern_id }}</p>
     <p>Description: {{ page_data.pattern.description }}</p>
-    <p>Pattern Length: {{ page_data.pattern.length }}</p>
-    <p>Pattern Width: {{ page_data.pattern.width }}</p>
+    <p>Pattern Length: {{ page_data.pattern.length }}cm</p>
+    <p>Pattern Width: {{ page_data.pattern.width }}cm</p>
+    <p>Knots Long: {{ page_data.pattern.knots_long }}</p>
+    <p>Knots Wide: {{ page_data.pattern.knots_wide }}</p>
+    <p>Number of Cords used: {{ page_data.pattern.num_of_cords }}</p>
+    <p>Length of Cords : {{ page_data.pattern.cords_length }}cm</p>
+    <p>Total Cord used: {{ page_data.pattern.total_cord }}cm</p>
     <p>Creator: {{ page_data.pattern.creator.name }} ({{ page_data.pattern.creator.email }})</p>
 
 

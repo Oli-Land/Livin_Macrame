@@ -49,7 +49,7 @@ def create_cord():
     db.session.add(new_cord)
     db.session.commit()
 
-    return redirect(url_for("cords.get_cords")) 
+    return redirect(url_for("cords.get_cord", id=new_cord.cord_id)) 
 
 
 # The GET specific route endpoint
