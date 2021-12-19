@@ -7,6 +7,7 @@ import boto3
 
 from models.patterns import Pattern
 from schemas.pattern_schema import pattern_schema
+from sqlalchemy import func
 
 projects = Blueprint('projects', __name__)
 
@@ -80,12 +81,15 @@ def get_project(id):
         ExpiresIn=100
     )
 
+
     # project_cord_cost = total 
 
     data = {
         "page_title": "Project Details",
         "project": project_schema.dump(project),
         "image": image_url
+        # "project_total_cord": db.session.query(func.sum(Pattern.total_cord)).filter(id in Pattern.projects).scalar()
+
     }
 
     return render_template("project_details.html", page_data=data)

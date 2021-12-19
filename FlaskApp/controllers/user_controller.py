@@ -65,7 +65,9 @@ def user_detail():
     if request.method == "GET":
         data = {
             "page_title": "Account Details",
-            "projects_count": db.session.query(func.count(Project.project_id)).filter(Project.creator_id==current_user.id).scalar()
+            "projects_count": db.session.query(func.count(Project.project_id)).filter(Project.creator_id==current_user.id).scalar(),
+            "projects_max_price": db.session.query(func.max(Project.price)).filter(Project.creator_id==current_user.id).scalar(),
+            "projects_min_price": db.session.query(func.min(Project.price)).filter(Project.creator_id==current_user.id).scalar()
         }
         return render_template("user_details.html", page_data = data)
     
