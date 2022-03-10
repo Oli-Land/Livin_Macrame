@@ -35,6 +35,9 @@ The instructions for Ubuntu 20:
 
 ```python -m pip install --upgrade pip```
 
+### Install PostgreSQL:
+
+```sudo apt-get install postgresql```
 
 ### CREATE VENV:
 ```bash
